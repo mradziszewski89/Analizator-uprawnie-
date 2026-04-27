@@ -1,0 +1,87 @@
+﻿================================================================================
+SharePoint Permission Analyzer - Log skanowania
+Data:    2026-04-15 10:06:25
+Serwer:  MOSSWFESE
+Uzytkownik: TEST\lab.m.radziszewski
+================================================================================
+[2026-04-15 10:06:26.027] [Info] ============================================================
+[2026-04-15 10:06:26.058] [Info] SharePoint Permission Analyzer v1.0 - Sesja: 59F83429
+[2026-04-15 10:06:26.058] [Info] Poczatek skanowania: 2026-04-15 10:06:25
+[2026-04-15 10:06:26.074] [Info] Konfiguracja: E:\AdminData\Analizator uprawnień\Analizator uprawnień\PowerShell\Config\ScanConfig.json
+[2026-04-15 10:06:26.074] [Info] ============================================================
+[2026-04-15 10:06:29.657] [Info] Weryfikacja uprawnien Farm Admin: OK
+[2026-04-15 10:06:29.879] [Info] Farma: SharePoint_Config, Build: 16.0.19127.20338
+[2026-04-15 10:06:29.911] [Info] Znaleziono 3 Web Application(s)
+[2026-04-15 10:06:32.230] [Info]   WebApp[1] 'SharePoint - osobiste.test.pl' Url='' Type='SPWebApplication'
+[2026-04-15 10:06:32.308] [Info] [1/3] Przetwarzam WebApp: https://osobiste.test.pl
+[2026-04-15 10:06:32.402] [Info] Skanowanie Web Application: https://osobiste.test.pl
+[2026-04-15 10:06:32.621] [Info] Skanowanie Site Collections w https://osobiste.test.pl (SC: 4)
+[2026-04-15 10:06:34.933] [Info]  Skanowanie Site Collection: https://osobiste.test.pl
+[2026-04-15 10:06:37.823] [Info]   Skanowanie Web: https://osobiste.test.pl
+[2026-04-15 10:06:38.696] [Error] Blad skanowania listy 'appdata' (f0ae3594-d0a2-4ffb-9955-11de039597fc): The property 'IsCatalog' cannot be found on this object. Verify that the property exists.
+[2026-04-15 10:06:38.885] [Error] Blad skanowania listy 'Composed Looks' (277c0de2-21ab-4b22-a655-3d90f354f76e): The property 'IsCatalog' cannot be found on this object. Verify that the property exists.
+[2026-04-15 10:06:38.916] [Error] Blad skanowania listy 'Content type publishing error log' (441bf5f2-1ab5-43c5-8af5-5fc795f7110f): The property 'IsCatalog' cannot be found on this object. Verify that the property exists.
+[2026-04-15 10:06:38.964] [Error] Blad skanowania listy 'SharePointHomeOrgLinks' (d6973f6f-9e17-42be-b6dc-ce937a186e93): The property 'IsCatalog' cannot be found on this object. Verify that the property exists.
+[2026-04-15 10:06:38.979] [Error] Blad skanowania listy 'TaxonomyHiddenList' (80488921-4bc8-41ab-874c-e931aecec12c): The property 'IsCatalog' cannot be found on this object. Verify that the property exists.
+[2026-04-15 10:06:39.027] [Error] Blad skanowania listy 'User Information List' (022b3bc6-18a5-4fdd-8520-1ab850d1d40e): The property 'IsCatalog' cannot be found on this object. Verify that the property exists.
+[2026-04-15 10:06:39.199] [Info]  Skanowanie Site Collection: https://osobiste.test.pl/personal/lab_m_radziszewski
+[2026-04-15 10:06:39.246] [Info]   Skanowanie Web: https://osobiste.test.pl/personal/lab_m_radziszewski
+[2026-04-15 10:06:39.703] [Error] Blad skanowania listy 'appdata' (ed2e4b0e-de2b-4ef2-85da-eeb57d39337c): The property 'IsCatalog' cannot be found on this object. Verify that the property exists.
+[2026-04-15 10:06:39.783] [Error] Blad skanowania listy 'Composed Looks' (fa96e084-4487-42bf-bd0d-4d0def2de51b): The property 'IsCatalog' cannot be found on this object. Verify that the property exists.
+[2026-04-15 10:06:39.783] [Error] Blad skanowania listy 'Content type publishing error log' (f1b18fde-edf4-465b-adfd-b3832c563761): The property 'IsCatalog' cannot be found on this object. Verify that the property exists.
+[2026-04-15 10:07:40.736] [Error] Blad skanowania listy 'SharePointHomeCacheList' (63558fee-80ad-4bca-9f7a-5714c7c9fac6): The property 'IsCatalog' cannot be found on this object. Verify that the property exists.
+[2026-04-15 10:07:40.736] [Error] Blad skanowania listy 'Social' (415433d3-f3b1-4ceb-a343-9065543fe2c7): The property 'IsCatalog' cannot be found on this object. Verify that the property exists.
+[2026-04-15 10:07:40.752] [Error] Blad skanowania listy 'TaxonomyHiddenList' (e20d6f98-4b49-4332-98f4-222dda5e37ec): The property 'IsCatalog' cannot be found on this object. Verify that the property exists.
+[2026-04-15 10:07:40.769] [Error] Blad skanowania listy 'User Information List' (cc602d88-61f4-4126-bac7-2a340d4ee5fc): The property 'IsCatalog' cannot be found on this object. Verify that the property exists.
+[2026-04-15 10:07:40.899] [Info]  Skanowanie Site Collection: https://osobiste.test.pl/personal/sp_search
+[2026-04-15 10:07:40.958] [Error] Blad skanowania SC https://osobiste.test.pl/personal/sp_search: The following exception occurred while trying to enumerate the collection: "Access is denied. (Exception from HRESULT: 0x80070005 (E_ACCESSDENIED))".
+[2026-04-15 10:07:41.116] [Info]  Skanowanie Site Collection: https://sitemaster-fd6313d0-aba0-4722-a4a4-d4f8afafe96c
+[2026-04-15 10:07:41.179] [Error] Blad skanowania SC https://sitemaster-fd6313d0-aba0-4722-a4a4-d4f8afafe96c: The following exception occurred while trying to enumerate the collection: "Access is denied. (Exception from HRESULT: 0x80070005 (E_ACCESSDENIED))".
+[2026-04-15 10:07:41.227] [Info]   WebApp[2] 'SharePoint - portalse.test.pl' Url='' Type='SPWebApplication'
+[2026-04-15 10:07:41.248] [Info] [2/3] Przetwarzam WebApp: https://portalse.test.pl
+[2026-04-15 10:07:41.258] [Info] Skanowanie Web Application: https://portalse.test.pl
+[2026-04-15 10:07:41.258] [Info] Skanowanie Site Collections w https://portalse.test.pl (SC: 1)
+[2026-04-15 10:07:41.342] [Info]  Skanowanie Site Collection: https://portalse.test.pl
+[2026-04-15 10:07:41.543] [Info]   Skanowanie Web: https://portalse.test.pl
+[2026-04-15 10:07:41.701] [Error] Blad skanowania listy 'appdata' (1dd40f5e-4a6a-4880-bedd-1808d4d95c4e): The property 'IsCatalog' cannot be found on this object. Verify that the property exists.
+[2026-04-15 10:07:41.717] [Error] Blad skanowania listy 'Composed Looks' (15c8d8f4-33fe-45c6-844f-2075acf37adb): The property 'IsCatalog' cannot be found on this object. Verify that the property exists.
+[2026-04-15 10:07:41.780] [Error] Blad skanowania listy 'Content type service application error log' (e0492b14-6e7e-43de-ab34-a551cedbcb24): The property 'IsCatalog' cannot be found on this object. Verify that the property exists.
+[2026-04-15 10:07:41.795] [Error] Blad skanowania listy 'Shared Packages' (68a328d8-1f56-4def-b842-1ea6a8fcfd19): The property 'IsCatalog' cannot be found on this object. Verify that the property exists.
+[2026-04-15 10:07:41.795] [Error] Blad skanowania listy 'StatusUslug' (830fa6aa-a7e4-4564-a090-61b798a3af6c): The property 'IsCatalog' cannot be found on this object. Verify that the property exists.
+[2026-04-15 10:07:41.811] [Error] Blad skanowania listy 'TaxonomyHiddenList' (feb68eb1-438c-4665-87cf-9b8e4f46d3ba): The property 'IsCatalog' cannot be found on this object. Verify that the property exists.
+[2026-04-15 10:07:41.811] [Error] Blad skanowania listy 'User Information List' (60e73484-2e5c-4729-9974-e599ac65bb58): The property 'IsCatalog' cannot be found on this object. Verify that the property exists.
+[2026-04-15 10:07:41.922] [Info]   WebApp[3] 'SharePoint - site.test.pl' Url='' Type='SPWebApplication'
+[2026-04-15 10:07:42.001] [Info] [3/3] Przetwarzam WebApp: http://site.test.pl
+[2026-04-15 10:07:42.001] [Info] Skanowanie Web Application: http://site.test.pl
+[2026-04-15 10:07:42.032] [Info] Skanowanie Site Collections w http://site.test.pl (SC: 1)
+[2026-04-15 10:07:42.111] [Info]  Skanowanie Site Collection: http://site.test.pl
+[2026-04-15 10:07:42.221] [Info]   Skanowanie Web: http://site.test.pl
+[2026-04-15 10:07:42.379] [Error] Blad skanowania listy 'appdata' (27f17f37-6f02-4eec-a1ae-613e94176285): The property 'IsCatalog' cannot be found on this object. Verify that the property exists.
+[2026-04-15 10:07:42.405] [Error] Blad skanowania listy 'Cal1' (274e1794-f8a8-4119-ac66-a7877405adc9): The property 'IsCatalog' cannot be found on this object. Verify that the property exists.
+[2026-04-15 10:07:42.474] [Error] Blad skanowania listy 'Composed Looks' (4ffb36a5-086b-4d23-969c-2c43784a43dc): The property 'IsCatalog' cannot be found on this object. Verify that the property exists.
+[2026-04-15 10:07:42.490] [Error] Blad skanowania listy 'List1' (fbff17de-4d01-491e-bef6-7494b4ce8d25): The property 'IsCatalog' cannot be found on this object. Verify that the property exists.
+[2026-04-15 10:07:42.506] [Error] Blad skanowania listy 'TaxonomyHiddenList' (3d0224f8-cfd9-4e5d-a028-12cd9c444e9d): The property 'IsCatalog' cannot be found on this object. Verify that the property exists.
+[2026-04-15 10:07:42.506] [Error] Blad skanowania listy 'User Information List' (d4350507-6f79-4786-be7f-af9fb2a813f7): The property 'IsCatalog' cannot be found on this object. Verify that the property exists.
+[2026-04-15 10:07:42.585] [Info]   Skanowanie Web: http://site.test.pl/subsite
+[2026-04-15 10:07:42.601] [Error] Blad skanowania listy 'Anons1_1' (d6374aca-48d9-4f86-8c1d-81369de757e6): The property 'IsCatalog' cannot be found on this object. Verify that the property exists.
+[2026-04-15 10:07:42.696] [Error] Blad skanowania listy 'Composed Looks' (673efad2-048a-4ba4-b4f6-98b60ea4344c): The property 'IsCatalog' cannot be found on this object. Verify that the property exists.
+[2026-04-15 10:07:42.712] [Error] Blad skanowania listy 'List1_1' (9bd8888c-63f9-4e34-bcb4-6cc593187862): The property 'IsCatalog' cannot be found on this object. Verify that the property exists.
+[2026-04-15 10:07:42.743] [Info]   Skanowanie Web: http://site.test.pl/subsite/subsite1
+[2026-04-15 10:07:42.791] [Error] Blad skanowania listy 'Cal1_1' (8c6af7ea-7fbd-4bad-95a8-043d0de2acaf): The property 'IsCatalog' cannot be found on this object. Verify that the property exists.
+[2026-04-15 10:07:42.811] [Error] Blad skanowania listy 'Composed Looks' (f56bee23-f9ce-4ad2-aa41-db3b9920cfe8): The property 'IsCatalog' cannot be found on this object. Verify that the property exists.
+[2026-04-15 10:07:42.842] [Info]   Skanowanie Web: http://site.test.pl/subsite/subsite2
+[2026-04-15 10:07:42.900] [Error] Blad skanowania listy 'Composed Looks' (57895f2e-4b77-4e66-a85a-6c10cbd6d2d1): The property 'IsCatalog' cannot be found on this object. Verify that the property exists.
+[2026-04-15 10:07:42.916] [Error] Blad skanowania listy 'Task' (c64639ae-6eb0-454c-bcc8-c1b5f4f5850f): The property 'IsCatalog' cannot be found on this object. Verify that the property exists.
+[2026-04-15 10:07:43.030] [Info] Laczna liczba obiektow: 18
+[2026-04-15 10:07:43.075] [Info] Statystyki: WebApps=3, SC=6, Webs=7, Lists=1, Items=1
+[2026-04-15 10:07:43.201] [Info] Skanowanie zakonczone. Czas: 00:01:17. Obiektow: 18. Przypizan: 68
+[2026-04-15 10:07:43.295] [Info] Eksport JSON: E:\AdminData\Analizator uprawnień\Analizator uprawnień\PowerShell\Output\PermissionReport_2026-04-15_10-06-25.json
+[2026-04-15 10:07:43.753] [Info] Eksport CSV: E:\AdminData\Analizator uprawnień\Analizator uprawnień\PowerShell\Output\PermissionReport_2026-04-15_10-06-25.csv
+[2026-04-15 10:07:43.800] [Info] Generowanie raportu HTML...
+[2026-04-15 10:07:43.811] [Info]   Szablon: E:\AdminData\Analizator uprawnień\Analizator uprawnień\Report
+[2026-04-15 10:07:43.816] [Info]   Wyjscie: E:\AdminData\Analizator uprawnień\Analizator uprawnień\PowerShell\Output\Report_2026-04-15_10-06-25
+[2026-04-15 10:07:44.030] [Info] Generowanie data.js...
+[2026-04-15 10:07:44.124] [Info] data.js wygenerowany: E:\AdminData\Analizator uprawnień\Analizator uprawnień\PowerShell\Output\Report_2026-04-15_10-06-25\data.js (48 KB)
+[2026-04-15 10:07:44.131] [Info] Raport HTML wygenerowany: E:\AdminData\Analizator uprawnień\Analizator uprawnień\PowerShell\Output\Report_2026-04-15_10-06-25
+[2026-04-15 10:07:44.226] [Info] Raport HTML: E:\AdminData\Analizator uprawnień\Analizator uprawnień\PowerShell\Output\Report_2026-04-15_10-06-25\index.html
+[2026-04-15 10:07:44.607] [Info] Sesja 59F83429 zakonczona. Bledy: 35

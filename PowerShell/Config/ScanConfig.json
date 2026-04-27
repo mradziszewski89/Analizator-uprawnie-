@@ -1,0 +1,102 @@
+{
+  "_comment": "SharePoint Permission Analyzer - Konfiguracja skanowania",
+  "_version": "1.0.0",
+
+  "FarmSettings": {
+    "IncludeCentralAdministration": false,
+    "WebApplicationUrls": [],
+    "_comment_WebApplicationUrls": "Pusta lista = skanuj wszystkie. Wypełnij aby ograniczyć zakres, np. ['http://portal', 'http://intranet']",
+    "SiteCollectionUrls": [],
+    "_comment_SiteCollectionUrls": "Pusta lista = skanuj wszystkie SC w wybranych WebApp",
+    "WebUrls": [],
+    "_comment_WebUrls": "Pusta lista = skanuj wszystkie Web w wybranych SC"
+  },
+
+  "ScanDepth": {
+    "ScanWebApplications": true,
+    "ScanSiteCollections": true,
+    "ScanWebs": true,
+    "ScanLists": true,
+    "ScanLibraries": true,
+    "ScanFolders": true,
+    "ScanFiles": true,
+    "ScanListItems": true,
+    "MaxItemsPerList": 0,
+    "_comment_MaxItemsPerList": "0 = bez limitu. Ustaw np. 5000 dla szybszego przebiegu testowego"
+  },
+
+  "FilterSettings": {
+    "ExcludeHiddenLists": true,
+    "ExcludeSystemLists": true,
+    "ExcludeCatalogLists": true,
+    "ExcludeSiteAssets": false,
+    "ExcludeAppLists": true,
+    "SkipListsWithInheritedPermissionsOnly": false,
+    "_comment_Skip": "true = skanuj uprawnienia list tylko gdy mają unikatowe ACL (szybciej, ale mniej kompletnie)"
+  },
+
+  "PrincipalExpansion": {
+    "RawAssignmentsOnly": false,
+    "_comment_Raw": "true = tylko przypisania SharePoint bez ekspansji grup, false = pełna ekspansja",
+    "ExpandSharePointGroups": true,
+    "ExpandDomainGroups": true,
+    "MaxGroupNestingDepth": 10,
+    "LdapServer": "",
+    "_comment_LdapServer": "Puste = auto-wykryj z Active Directory. Podaj np. 'LDAP://DC=contoso,DC=com'",
+    "LdapTimeout": 30,
+    "_comment_LdapTimeout": "Timeout LDAP w sekundach",
+    "CacheDomainGroupExpansion": true,
+    "GroupCachePath": ""
+  },
+
+  "IncrementalScan": {
+    "Enabled": false,
+    "BaselinePath": "",
+    "_comment_BaselinePath": "Ścieżka do poprzedniego pliku JSON ze skanem bazowym",
+    "ScanOnlyModifiedSince": "",
+    "_comment_ScanOnlyModifiedSince": "ISO 8601, np. '2024-01-01T00:00:00'. Puste = skanuj wszystko"
+  },
+
+  "Performance": {
+    "ThrottleDelayMs": 10,
+    "_comment_ThrottleDelay": "Opóźnienie w ms między obiektami. 0 = bez throttlingu. Ustaw 10-50 dla dużych farm",
+    "BatchSize": 100,
+    "_comment_BatchSize": "Liczba obiektów przetwarzanych przed zapisem checkpointu",
+    "EnableCheckpointing": true,
+    "CheckpointPath": "",
+    "_comment_CheckpointPath": "Puste = auto. Ścieżka do pliku checkpoint (umożliwia wznowienie)"
+  },
+
+  "Output": {
+    "OutputPath": "",
+    "_comment_OutputPath": "Puste = katalog Output obok skryptu. Podaj bezwzględną ścieżkę aby nadpisać",
+    "ReportName": "PermissionReport",
+    "_comment_ReportName": "Prefix nazwy pliku raportu. Data i czas zostaną dodane automatycznie",
+    "ExportJson": true,
+    "ExportCsv": true,
+    "GenerateHtmlReport": true,
+    "HtmlTemplatePath": "",
+    "_comment_HtmlTemplatePath": "Puste = użyj domyślnego szablonu z folderu Report/",
+    "SharePointPublishUrl": "",
+    "_comment_SharePointPublishUrl": "URL biblioteki lub folderu SharePoint do auto-publikacji raportu, np. 'http://portal/sites/Raporty/Documents'. Puste = nie publikuj automatycznie (podaj URL przez parametr -SharePointLibraryUrl lub wpisz tutaj).",
+    "PrettifyJson": false,
+    "_comment_PrettifyJson": "true = czytelny JSON (większy plik), false = kompaktowy (szybszy)",
+    "CompressOutput": false
+  },
+
+  "Logging": {
+    "LogLevel": "Info",
+    "_comment_LogLevel": "Verbose | Info | Warning | Error",
+    "LogPath": "",
+    "_comment_LogPath": "Puste = katalog Logs/ obok skryptu",
+    "LogErrorDetails": true,
+    "LogSkippedObjects": true
+  },
+
+  "Security": {
+    "RequireFarmAdminRole": true,
+    "_comment_RequireFarm": "true = sprawdź czy uruchamiający jest Farm Admin przed skanowaniem",
+    "AuditLogPath": "",
+    "_comment_AuditLogPath": "Puste = brak logu audytowego skanowania"
+  }
+}

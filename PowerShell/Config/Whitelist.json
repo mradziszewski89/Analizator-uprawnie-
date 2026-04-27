@@ -1,0 +1,68 @@
+{
+  "_comment": "SharePoint Permission Analyzer - Whitelist kont chronionych przed usunięciem uprawnień",
+  "_version": "1.0.0",
+
+  "ProtectedAccounts": {
+    "_comment": "Konta i grupy, których uprawnień NIE WOLNO usuwać przez interfejs remediacji",
+
+    "Users": [
+      {
+        "LoginName": "TEST\\SP_Farm",
+        "DisplayName": "System Account",
+        "Reason": "Konto systemowe SharePoint - krytyczne dla działania farmy"
+      },
+      {
+        "LoginName": "NT AUTHORITY\\LOCAL SERVICE",
+        "DisplayName": "Local Service",
+        "Reason": "Konto serwisowe Windows"
+      },
+      {
+        "LoginName": "NT AUTHORITY\\NETWORK SERVICE",
+        "DisplayName": "Network Service",
+        "Reason": "Konto serwisowe Windows"
+      }
+    ],
+
+    "LoginNamePatterns": [
+      {
+        "Pattern": "^SHAREPOINT\\\\",
+        "Reason": "Wszystkie wbudowane konta SharePoint"
+      },
+      {
+        "Pattern": "^NT AUTHORITY\\\\",
+        "Reason": "Wszystkie konta systemowe Windows"
+      }
+    ],
+
+    "SharePointGroups": [
+      {
+        "NamePattern": ".*Farm Administrators.*",
+        "Reason": "Grupy administratorów farmy - usunięcie może uniemożliwić zarządzanie"
+      }
+    ],
+
+    "PermissionLevelsToNeverRemove": [
+      "Full Control"
+    ],
+    "_comment_PermissionLevels": "OPCJONALNIE: Jeśli lista niepusta, blokuj usuwanie Full Control przez interfejs (wymaga potwierdzenia)",
+
+    "ServiceAccounts": {
+      "_comment": "Wzorce LoginName kont serwisowych farmy - dodaj własne",
+      "Patterns": [],
+      "ExplicitLogins": []
+    },
+
+    "FarmAdmins": {
+      "_comment": "Jawna lista loginów administratorów farmy - uzupełnij",
+      "Logins": []
+    }
+  },
+
+  "RemediationSafeguards": {
+    "PreventRemovingAllAdminsFromObject": true,
+    "PreventRemovingOwnAccess": true,
+    "RequireAtLeastOneFullControlAfterRemediation": true,
+    "MinimumFullControlPrincipalsAfterRemediation": 1,
+    "AllowBypassWithExplicitConfirmation": false
+  }
+}

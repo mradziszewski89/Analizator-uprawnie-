@@ -1,0 +1,494 @@
+﻿<!DOCTYPE html>
+<html lang="pl" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:;">
+<title>SharePoint Permission Analyzer</title>
+
+<!-- Lokalne biblioteki CSS (pobierz zgodnie z instrukcja Install-Dependencies.ps1) -->
+<link rel="stylesheet" href="assets/css/datatables.min.css">
+<link rel="stylesheet" href="assets/css/jstree/default/style.min.css">
+<link rel="stylesheet" href="assets/css/report.css">
+</head>
+<body>
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+<header class="app-header">
+  <div class="header-inner">
+    <div class="header-brand">
+      <svg class="brand-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="32" height="32" rx="6" fill="#0078d4"/>
+        <path d="M8 10h16v2H8zm0 5h10v2H8zm0 5h13v2H8z" fill="white"/>
+        <circle cx="24" cy="22" r="5" fill="#50e6ff"/>
+        <path d="M22 22l1.5 1.5L26 20" stroke="#0078d4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div>
+        <div class="brand-title">SharePoint Permission Analyzer</div>
+        <div class="brand-subtitle" id="reportSubtitle">Ladowanie danych...</div>
+      </div>
+    </div>
+    <div class="header-actions">
+      <span class="scan-info" id="scanInfo"></span>
+      <button class="btn btn-icon" id="themeToggle" title="Przelacz motyw jasny/ciemny" aria-label="Przelacz motyw">
+        <svg id="iconSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg id="iconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================
+     BŁAD ŁADOWANIA
+     ============================================================ -->
+<div id="loadError" class="load-error" style="display:none">
+  <div class="load-error-icon">⚠</div>
+  <h2>Brak danych raportu</h2>
+  <p>Nie znaleziono pliku <strong>data.js</strong> lub dane są nieprawidłowe.</p>
+  <p>Upewnij się, że otwierasz plik <code>index.html</code> z folderu wygenerowanego raportu, który zawiera plik <code>data.js</code>.</p>
+  <p class="error-detail" id="errorDetail"></p>
+</div>
+
+<!-- ============================================================
+     NAWIGACJA GŁÓWNA (TABS)
+     ============================================================ -->
+<nav class="main-nav" id="mainNav" style="display:none">
+  <button class="nav-tab active" data-tab="dashboard">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+    Dashboard
+  </button>
+  <button class="nav-tab" data-tab="table">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+    Tabela uprawnień
+  </button>
+  <button class="nav-tab" data-tab="tree">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><polyline points="3,6 3,18"/><polyline points="3,12 6,12"/></svg>
+    Drzewo lokalizacji
+  </button>
+  <button class="nav-tab" data-tab="user-lookup">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    Wyszukaj użytkownika
+  </button>
+  <button class="nav-tab" data-tab="remediation">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+    Remediacja
+  </button>
+  <button class="nav-tab" data-tab="changelog">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+    Wersjonowanie
+  </button>
+</nav>
+
+<!-- ============================================================
+     GŁÓWNA ZAWARTOŚĆ
+     ============================================================ -->
+<main class="app-main" id="appMain" style="display:none">
+
+  <!-- TAB: DASHBOARD -->
+  <section id="tab-dashboard" class="tab-content active">
+    <div class="section-header">
+      <h1>Dashboard</h1>
+      <div class="section-actions">
+        <button class="btn btn-sm" onclick="exportDashboardJson()">Eksportuj JSON</button>
+      </div>
+    </div>
+
+    <!-- Karty statystyk - Hierarchia -->
+    <div class="stats-group-title">Aplikacje Web / Site Collections / Witryny / Listy i biblioteki</div>
+    <div class="stats-grid" id="statsGridHierarchy">
+      <!-- Wypełniane przez JS -->
+    </div>
+
+    <!-- Karty statystyk - Metryki -->
+    <div class="stats-group-title">Metryki skanowania</div>
+    <div class="stats-grid" id="statsGridMetrics">
+      <!-- Wypełniane przez JS -->
+    </div>
+
+    <!-- Wykresy -->
+    <div class="charts-row">
+      <div class="chart-card">
+        <h3 class="chart-title">Typy principalów</h3>
+        <div class="chart-wrapper"><canvas id="chartPrincipalTypes"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <h3 class="chart-title">Poziomy uprawnień</h3>
+        <div class="chart-wrapper"><canvas id="chartPermissionLevels"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <h3 class="chart-title">Obiekty wg typu</h3>
+        <div class="chart-wrapper"><canvas id="chartObjectTypes"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <h3 class="chart-title">Unikatowe vs. Dziedziczone</h3>
+        <div class="chart-wrapper"><canvas id="chartUniqVsInherited"></canvas></div>
+      </div>
+    </div>
+
+    <!-- Top lista obiektów z unikatowymi ACL -->
+    <div class="section-card">
+      <h3 class="section-card-title">Top 20 - Obiekty z największą liczbą principalów</h3>
+      <div id="topUniqueObjects" class="top-list">
+        <!-- Wypełniane przez JS -->
+      </div>
+    </div>
+
+    <!-- Alerty i ostrzeżenia -->
+    <div class="section-card" id="alertsCard">
+      <h3 class="section-card-title">Alerty bezpieczeństwa</h3>
+      <div id="alertsList" class="alerts-list">
+        <!-- Wypełniane przez JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- TAB: TABELA UPRAWNIEŃ -->
+  <section id="tab-table" class="tab-content" style="display:none">
+    <div class="section-header">
+      <h1>Tabela uprawnień</h1>
+      <div class="section-actions">
+        <button class="btn btn-sm btn-primary" id="btnSelectAll">Zaznacz wszystkie</button>
+        <button class="btn btn-sm" id="btnDeselectAll">Odznacz</button>
+        <div class="export-menu">
+          <button class="btn btn-sm" onclick="exportTableCsv()">Eksportuj CSV</button>
+          <button class="btn btn-sm" onclick="exportTableJson()">Eksportuj JSON</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel filtrów -->
+    <div class="filter-panel" id="filterPanel">
+      <div class="filter-grid">
+        <div class="filter-group">
+          <label>Web Application</label>
+          <select id="fWebApp" class="filter-select"><option value="">Wszystkie</option></select>
+        </div>
+        <div class="filter-group">
+          <label>Site Collection</label>
+          <select id="fSiteCollection" class="filter-select"><option value="">Wszystkie</option></select>
+        </div>
+        <div class="filter-group">
+          <label>Typ obiektu</label>
+          <select id="fObjectType" class="filter-select">
+            <option value="">Wszystkie</option>
+            <option value="WebApplication">Web Application</option>
+            <option value="SiteCollection">Site Collection</option>
+            <option value="Web">Witryna</option>
+            <option value="List">Lista</option>
+            <option value="Library">Biblioteka</option>
+            <option value="Folder">Folder</option>
+            <option value="File">Plik</option>
+            <option value="ListItem">Element</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>Typ principala</label>
+          <select id="fPrincipalType" class="filter-select">
+            <option value="">Wszyscy</option>
+            <option value="User">Użytkownicy</option>
+            <option value="SharePointGroup">Grupy SharePoint</option>
+            <option value="DomainGroup">Grupy domenowe</option>
+            <option value="SpecialPrincipal">Specjalne</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>Dziedziczenie</label>
+          <select id="fInheritance" class="filter-select">
+            <option value="">Wszystkie</option>
+            <option value="unique">Tylko unikatowe</option>
+            <option value="inherited">Tylko dziedziczone</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>Poziom uprawnień</label>
+          <select id="fPermLevel" class="filter-select"><option value="">Wszystkie</option></select>
+        </div>
+        <div class="filter-group">
+          <label>Źródło</label>
+          <select id="fSourceType" class="filter-select">
+            <option value="">Wszystkie</option>
+            <option value="Direct">Bezpośrednie</option>
+            <option value="ViaSharePointGroup">Przez grupę SP</option>
+            <option value="ViaDomainGroup">Przez grupę domenową</option>
+            <option value="Inherited">Odziedziczone</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>Użytkownik/Grupa</label>
+          <input type="text" id="fPrincipalSearch" class="filter-input" placeholder="Wpisz LoginName lub DisplayName...">
+        </div>
+        <div class="filter-group">
+          <label>Tytuł/URL</label>
+          <input type="text" id="fUrlSearch" class="filter-input" placeholder="Wpisz fragment URL lub tytułu...">
+        </div>
+        <div class="filter-group filter-checkboxes">
+          <label class="checkbox-label"><input type="checkbox" id="fOnlyUnique"> Tylko unikatowe ACL</label>
+          <label class="checkbox-label"><input type="checkbox" id="fOnlyDirect"> Tylko bezpośrednie</label>
+          <label class="checkbox-label"><input type="checkbox" id="fOnlyLimitedAccess"> Tylko Limited Access</label>
+          <label class="checkbox-label"><input type="checkbox" id="fOnlyOrphaned"> Tylko osierocone</label>
+        </div>
+        <div class="filter-group filter-actions">
+          <button class="btn btn-primary btn-sm" id="btnApplyFilters">Zastosuj</button>
+          <button class="btn btn-sm" id="btnClearFilters">Wyczyść</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabela -->
+    <div class="table-wrapper">
+      <table id="permissionsTable" class="permissions-table" style="width:100%">
+        <thead>
+          <tr>
+            <th class="col-check"><input type="checkbox" id="checkAll" title="Zaznacz wszystkie widoczne"></th>
+            <th>Typ obiektu</th>
+            <th>Lokalizacja</th>
+            <th>Tytuł</th>
+            <th>Dziedziczenie</th>
+            <th>Przypisania</th>
+            <th>Akcje</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          <!-- Wypełniane przez DataTables -->
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- TAB: DRZEWO LOKALIZACJI -->
+  <section id="tab-tree" class="tab-content" style="display:none">
+    <div class="section-header">
+      <h1>Drzewo lokalizacji</h1>
+      <div class="section-actions">
+        <button class="btn btn-sm" onclick="treeExpandAll()">Rozwiń wszystko</button>
+        <button class="btn btn-sm" onclick="treeCollapseAll()">Zwiń wszystko</button>
+        <input type="text" id="treeSearch" class="filter-input" style="width:200px" placeholder="Szukaj w drzewie...">
+      </div>
+    </div>
+    <div class="tree-layout">
+      <div class="tree-panel">
+        <div id="locationTree"></div>
+      </div>
+      <div class="tree-detail-panel" id="treeDetailPanel">
+        <div class="tree-detail-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h18v4H3zm0 6h18v4H3zm0 6h18v4H3z"/></svg>
+          <p>Wybierz element z drzewa, aby zobaczyć szczegóły uprawnień</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAB: WYSZUKAJ UŻYTKOWNIKA -->
+  <section id="tab-user-lookup" class="tab-content" style="display:none">
+    <div class="section-header">
+      <h1>Wyszukaj użytkownika / grupę</h1>
+    </div>
+    <div class="lookup-panel">
+      <div class="lookup-search-row">
+        <input type="text" id="userLookupInput" class="filter-input lookup-input"
+               placeholder="Wpisz LoginName, DisplayName lub email...">
+        <button class="btn btn-primary" id="btnUserLookup">Szukaj</button>
+        <button class="btn btn-sm" id="btnExportLookupCsv" style="display:none">Eksportuj CSV</button>
+      </div>
+      <div class="lookup-suggestions" id="lookupSuggestions" style="display:none"></div>
+      <div id="lookupResults" class="lookup-results">
+        <div class="lookup-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <p>Wpisz nazwę użytkownika lub grupy, aby wyświetlić wszystkie miejsca, do których ma dostęp.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAB: REMEDIACJA -->
+  <section id="tab-remediation" class="tab-content" style="display:none">
+    <div class="section-header">
+      <h1>Remediacja uprawnień</h1>
+    </div>
+
+    <div class="remediation-layout">
+      <!-- Panel wyboru -->
+      <div class="remediation-panel">
+        <h3>Wybrane elementy do remediacji</h3>
+        <p class="info-text">Zaznacz rekordy w tabeli uprawnień, a następnie wróć tutaj, aby wykonać akcję remediacyjną.</p>
+
+        <div id="selectedItemsPanel">
+          <div class="empty-selection">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            <p>Brak zaznaczonych elementów</p>
+            <button class="btn btn-sm" onclick="switchTab('table')">Przejdź do tabeli uprawnień</button>
+          </div>
+        </div>
+
+        <div id="selectedItemsList" style="display:none">
+          <div class="selected-count-bar">
+            <span id="selectedCount">0 elementów wybranych</span>
+            <button class="btn btn-sm btn-danger" onclick="clearRemediationSelection()">Wyczyść wybór</button>
+          </div>
+          <div id="selectedItemsContainer" class="selected-items-list"></div>
+        </div>
+      </div>
+
+      <!-- Panel akcji -->
+      <div class="remediation-actions-panel">
+        <h3>Akcja remediacyjna</h3>
+
+        <div class="action-group">
+          <label>Wybierz akcję:</label>
+          <select id="remediationAction" class="filter-select">
+            <option value="">-- wybierz --</option>
+            <option value="RemoveDirectUserPermission">Usuń bezpośrednie uprawnienie użytkownika</option>
+            <option value="RemoveSharePointGroupAssignment">Usuń przypisanie grupy SharePoint z obiektu</option>
+            <option value="RemoveDomainGroupAssignment">Usuń przypisanie grupy domenowej z obiektu</option>
+            <option value="RestoreInheritance">Przywróć dziedziczenie uprawnień</option>
+          </select>
+        </div>
+
+        <div class="action-group">
+          <label>Powód remediacji:</label>
+          <input type="text" id="remediationReason" class="filter-input"
+                 placeholder="Opisz powód zmiany (do logu audytowego)...">
+        </div>
+
+        <div class="action-group">
+          <label class="checkbox-label large">
+            <input type="checkbox" id="dryRunToggle" checked>
+            <strong>Tryb DRY-RUN</strong> (symulacja - bez rzeczywistych zmian)
+          </label>
+        </div>
+
+        <div class="mode-indicator" id="modeIndicator">
+          <div class="mode-dryrun">
+            <span class="mode-icon">🔍</span>
+            <strong>Tryb DRY-RUN aktywny</strong> - skrypt nie wprowadzi zmian. Wymagane ponowne uruchomienie z -DryRun $false.
+          </div>
+        </div>
+
+        <hr>
+
+        <div class="action-buttons">
+          <button class="btn btn-primary" id="btnGenerateScript" onclick="generateRemediationScript()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            Generuj skrypt PS1
+          </button>
+          <button class="btn btn-primary" id="btnExportPlan" onclick="exportRemediationPlan()">
+            Eksportuj plan (JSON)
+          </button>
+        </div>
+
+        <hr>
+
+        <h4>Bezpośrednia remediacja przez SharePoint REST API</h4>
+
+        <div id="spConnectionStatus" class="sp-status sp-status-unknown">
+          <span class="sp-status-icon">?</span>
+          <span class="sp-status-text">Wykrywanie środowiska SharePoint...</span>
+        </div>
+
+        <div class="action-group sp-url-group">
+          <label>URL witryny SharePoint:</label>
+          <div class="sp-url-row">
+            <input id="spSiteUrl" type="url" class="filter-input" placeholder="https://site.test.pl/...">
+            <button class="btn btn-sm" id="btnTestSpConnection" onclick="testSpConnection()">Testuj połączenie</button>
+          </div>
+        </div>
+
+        <button class="btn btn-warning" id="btnExecuteOnSP" onclick="executeOnSharePoint()" disabled>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
+          Wykonaj bezpośrednio na SharePoint
+        </button>
+
+        <!-- Panel postępu REST -->
+        <div id="spExecutionPanel" style="display:none" class="sp-execution-panel">
+          <div class="sp-progress-wrap">
+            <div class="sp-progress-bar"><div id="spProgressFill" style="width:0%"></div></div>
+            <span id="spProgressText">0 / 0</span>
+          </div>
+          <div id="spResultsLog" class="sp-results-log"></div>
+          <div id="spSummary" class="sp-summary"></div>
+        </div>
+
+        <!-- Preview planu -->
+        <div id="remediationPreview" style="display:none" class="remediation-preview">
+          <h4>Podgląd planu remediacji</h4>
+          <div id="previewContent"></div>
+        </div>
+
+        <hr>
+
+        <!-- Wdrożenie raportu do biblioteki SP -->
+        <details class="deploy-section">
+          <summary>Wdróż raport do biblioteki SharePoint</summary>
+          <p class="info-text">Generuje skrypt PS1 (SSOM), który wgrywa cały folder raportu do wybranej biblioteki dokumentów SharePoint.</p>
+          <div class="action-group">
+            <label>URL docelowej biblioteki:</label>
+            <input id="deployTargetUrl" type="url" class="filter-input" placeholder="https://site.test.pl/sites/Raporty/Documents">
+          </div>
+          <button class="btn btn-primary" onclick="generateDeployScript()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            Generuj skrypt wdrożenia
+          </button>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAB: WERSJONOWANIE -->
+  <section id="tab-changelog" class="tab-content" style="display:none">
+    <div class="section-header">
+      <h1>Wersjonowanie uprawnień</h1>
+      <div class="section-actions">
+        <span id="changelogMeta" style="font-size:12px;color:var(--text-muted)"></span>
+      </div>
+    </div>
+    <div id="changelogContent">
+      <!-- Wypełniane przez JS -->
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     MODAL: SZCZEGÓŁY OBIEKTU
+     ============================================================ -->
+<div id="detailModal" class="modal" style="display:none" role="dialog" aria-modal="true">
+  <div class="modal-backdrop" onclick="closeDetailModal()"></div>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-header">
+      <h2 id="modalTitle">Szczegóły obiektu</h2>
+      <button class="modal-close" onclick="closeDetailModal()" aria-label="Zamknij">&times;</button>
+    </div>
+    <div class="modal-body" id="modalBody">
+      <!-- Wypełniane przez JS -->
+    </div>
+    <div class="modal-footer">
+      <button class="btn" onclick="closeDetailModal()">Zamknij</button>
+      <button class="btn btn-sm" onclick="exportObjectDetailJson()">Eksportuj JSON</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     TOAST NOTIFICATIONS
+     ============================================================ -->
+<div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+<!-- ============================================================
+     SKRYPTY LOKALNE
+     ============================================================ -->
+<!-- DANE RAPORTU - generowane przez PowerShell -->
+<script src="data.js"></script>
+
+<!-- Lokalne biblioteki JS (pobierz zgodnie z instrukcja Install-Dependencies.ps1) -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/datatables.min.js"></script>
+<script src="assets/js/jstree.min.js"></script>
+<script src="assets/js/chart.umd.min.js"></script>
+
+<!-- Główna logika raportu -->
+<script src="assets/js/report.js"></script>
+</body>
+</html>

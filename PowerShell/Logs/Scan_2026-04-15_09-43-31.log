@@ -1,0 +1,30 @@
+﻿================================================================================
+SharePoint Permission Analyzer - Log skanowania
+Data:    2026-04-15 09:43:31
+Serwer:  MOSSWFESE
+Uzytkownik: TEST\lab.m.radziszewski
+================================================================================
+[2026-04-15 09:43:31.618] [Info] ============================================================
+[2026-04-15 09:43:31.665] [Info] SharePoint Permission Analyzer v1.0 - Sesja: B3B68A88
+[2026-04-15 09:43:31.665] [Info] Poczatek skanowania: 2026-04-15 09:43:31
+[2026-04-15 09:43:31.680] [Info] Konfiguracja: E:\AdminData\Analizator uprawnień\Analizator uprawnień\PowerShell\Config\ScanConfig.json
+[2026-04-15 09:43:31.680] [Info] ============================================================
+[2026-04-15 09:43:35.971] [Info] Weryfikacja uprawnien Farm Admin: OK
+[2026-04-15 09:43:36.223] [Info] Farma: SharePoint_Config, Build: 16.0.19127.20338
+[2026-04-15 09:43:36.255] [Info] Znaleziono 3 Web Application(s)
+[2026-04-15 09:43:38.807] [Warning] Pomijanie WebApp 'SharePoint - osobiste.test.pl' - brak wlasciwosci Url
+[2026-04-15 09:43:39.035] [Warning] Pomijanie WebApp 'SharePoint - portalse.test.pl' - brak wlasciwosci Url
+[2026-04-15 09:43:39.193] [Warning] Pomijanie WebApp 'SharePoint - site.test.pl' - brak wlasciwosci Url
+[2026-04-15 09:43:39.320] [Info] Laczna liczba obiektow: 0
+[2026-04-15 09:43:39.337] [Info] Statystyki: WebApps=0, SC=0, Webs=0, Lists=0, Items=0
+[2026-04-15 09:43:39.431] [Info] Skanowanie zakonczone. Czas: 00:00:07. Obiektow: 0. Przypizan: 0
+[2026-04-15 09:43:39.556] [Info] Eksport JSON: E:\AdminData\Analizator uprawnień\Analizator uprawnień\PowerShell\Output\PermissionReport_2026-04-15_09-43-31.json
+[2026-04-15 09:43:39.635] [Info] Eksport CSV: E:\AdminData\Analizator uprawnień\Analizator uprawnień\PowerShell\Output\PermissionReport_2026-04-15_09-43-31.csv
+[2026-04-15 09:43:39.651] [Info] Generowanie raportu HTML...
+[2026-04-15 09:43:39.667] [Info]   Szablon: E:\AdminData\Analizator uprawnień\Analizator uprawnień\Report
+[2026-04-15 09:43:39.667] [Info]   Wyjscie: E:\AdminData\Analizator uprawnień\Analizator uprawnień\PowerShell\Output\Report_2026-04-15_09-43-31
+[2026-04-15 09:43:39.809] [Info] Generowanie data.js...
+[2026-04-15 09:43:39.872] [Info] data.js wygenerowany: E:\AdminData\Analizator uprawnień\Analizator uprawnień\PowerShell\Output\Report_2026-04-15_09-43-31\data.js (2 KB)
+[2026-04-15 09:43:39.888] [Info] Raport HTML wygenerowany: E:\AdminData\Analizator uprawnień\Analizator uprawnień\PowerShell\Output\Report_2026-04-15_09-43-31
+[2026-04-15 09:43:39.904] [Info] Raport HTML: E:\AdminData\Analizator uprawnień\Analizator uprawnień\PowerShell\Output\Report_2026-04-15_09-43-31\index.html
+[2026-04-15 09:43:40.369] [Info] Sesja B3B68A88 zakonczona. Bledy: 0

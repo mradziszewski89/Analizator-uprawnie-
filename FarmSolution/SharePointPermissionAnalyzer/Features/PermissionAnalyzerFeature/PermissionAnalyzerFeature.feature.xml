@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Feature xmlns="http://schemas.microsoft.com/sharepoint/"
+         Id="B1C2D3E4-F5A6-7890-BCDE-F123456789AB"
+         Title="SharePoint Permission Analyzer"
+         Description="Bezpieczny backend administracyjny dla remediacji uprawnień SharePoint. Instaluje Application Page dla operacji remediacji z pełnym logowaniem audytowym."
+         Scope="Farm"
+         Version="1.0.0.0"
+         Hidden="false"
+         DefaultResourceFile="core"
+         ReceiverAssembly="SharePointPermissionAnalyzer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=TWOJ_PUBLIC_KEY_TOKEN"
+         ReceiverClass="SharePointPermissionAnalyzer.Features.PermissionAnalyzerFeature.PermissionAnalyzerFeatureEventReceiver">
+</Feature>

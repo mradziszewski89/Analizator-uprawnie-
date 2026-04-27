@@ -1,0 +1,22 @@
+﻿================================================================================
+SharePoint Permission Analyzer - Log skanowania
+Data:    2026-04-15 09:41:17
+Serwer:  MOSSWFESE
+Uzytkownik: TEST\lab.m.radziszewski
+================================================================================
+[2026-04-15 09:41:17.175] [Info] ============================================================
+[2026-04-15 09:41:17.206] [Info] SharePoint Permission Analyzer v1.0 - Sesja: 96797C1C
+[2026-04-15 09:41:17.206] [Info] Poczatek skanowania: 2026-04-15 09:41:17
+[2026-04-15 09:41:17.222] [Info] Konfiguracja: E:\AdminData\Analizator uprawnień\Analizator uprawnień\PowerShell\Config\ScanConfig.json
+[2026-04-15 09:41:17.222] [Info] ============================================================
+[2026-04-15 09:41:23.086] [Info] Weryfikacja uprawnien Farm Admin: OK
+[2026-04-15 09:41:23.362] [Info] Farma: SharePoint_Config, Build: 16.0.19127.20338
+[2026-04-15 09:41:23.401] [Info] Znaleziono 3 Web Application(s)
+[2026-04-15 09:41:26.409] [Error] BLAD KRYTYCZNY podczas skanowania farmy: The property 'Url' cannot be found on this object. Verify that the property exists.
+at Invoke-SPFarmScan, E:\AdminData\Analizator uprawnień\Analizator uprawnień\PowerShell\Modules\SPPermissionScanner.psm1: line 1640
+at <ScriptBlock>, E:\AdminData\Analizator uprawnień\Analizator uprawnień\PowerShell\Start-PermissionScan.ps1: line 277
+at <ScriptBlock>, <No file>: line 1
+[2026-04-15 09:41:26.487] [Error] BLAD KRYTYCZNY: The property 'Url' cannot be found on this object. Verify that the property exists.
+StackTrace: at Invoke-SPFarmScan, E:\AdminData\Analizator uprawnień\Analizator uprawnień\PowerShell\Modules\SPPermissionScanner.psm1: line 1640
+at <ScriptBlock>, E:\AdminData\Analizator uprawnień\Analizator uprawnień\PowerShell\Start-PermissionScan.ps1: line 277
+at <ScriptBlock>, <No file>: line 1

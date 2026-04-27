@@ -1,0 +1,26 @@
+﻿================================================================================
+SharePoint Permission Analyzer - Log skanowania
+Data:    2026-04-15 09:54:06
+Serwer:  MOSSWFESE
+Uzytkownik: TEST\lab.m.radziszewski
+================================================================================
+[2026-04-15 09:54:06.573] [Info] ============================================================
+[2026-04-15 09:54:06.604] [Info] SharePoint Permission Analyzer v1.0 - Sesja: E61CF426
+[2026-04-15 09:54:06.619] [Info] Poczatek skanowania: 2026-04-15 09:54:06
+[2026-04-15 09:54:06.651] [Info] Konfiguracja: E:\AdminData\Analizator uprawnień\Analizator uprawnień\PowerShell\Config\ScanConfig.json
+[2026-04-15 09:54:06.666] [Info] ============================================================
+[2026-04-15 09:54:11.276] [Info] Weryfikacja uprawnien Farm Admin: OK
+[2026-04-15 09:54:11.481] [Info] Farma: SharePoint_Config, Build: 16.0.19127.20338
+[2026-04-15 09:54:11.512] [Info] Znaleziono 3 Web Application(s)
+[2026-04-15 09:54:14.104] [Info]   WebApp[1] 'SharePoint - osobiste.test.pl' Url='' Type='SPWebApplication'
+[2026-04-15 09:54:14.182] [Info] [1/3] Przetwarzam WebApp: https://osobiste.test.pl
+[2026-04-15 09:54:14.276] [Error] BLAD KRYTYCZNY podczas skanowania farmy: The property 'Url' cannot be found on this object. Verify that the property exists.
+at Get-SPWebApplicationPermissions, E:\AdminData\Analizator uprawnień\Analizator uprawnień\PowerShell\Modules\SPPermissionScanner.psm1: line 1449
+at Invoke-SPFarmScan, E:\AdminData\Analizator uprawnień\Analizator uprawnień\PowerShell\Modules\SPPermissionScanner.psm1: line 1689
+at <ScriptBlock>, E:\AdminData\Analizator uprawnień\Analizator uprawnień\PowerShell\Start-PermissionScan.ps1: line 277
+at <ScriptBlock>, <No file>: line 1
+[2026-04-15 09:54:14.400] [Error] BLAD KRYTYCZNY: The property 'Url' cannot be found on this object. Verify that the property exists.
+StackTrace: at Get-SPWebApplicationPermissions, E:\AdminData\Analizator uprawnień\Analizator uprawnień\PowerShell\Modules\SPPermissionScanner.psm1: line 1449
+at Invoke-SPFarmScan, E:\AdminData\Analizator uprawnień\Analizator uprawnień\PowerShell\Modules\SPPermissionScanner.psm1: line 1689
+at <ScriptBlock>, E:\AdminData\Analizator uprawnień\Analizator uprawnień\PowerShell\Start-PermissionScan.ps1: line 277
+at <ScriptBlock>, <No file>: line 1

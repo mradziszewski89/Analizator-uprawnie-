@@ -1,0 +1,58 @@
+{
+  "_comment": "SharePoint Permission Analyzer - Lista wykluczeń z remediacji i ostrzeżeń",
+  "_version": "1.0.0",
+
+  "ExcludedWebApplications": [
+    "_comment: Adresy URL Web Applications wyłączonych ze skanowania"
+  ],
+
+  "ExcludedSiteCollections": [
+    "_comment: URL-e Site Collections wyłączonych ze skanowania, np. '/sites/legacy-archive'"
+  ],
+
+  "ExcludedWebs": [
+    "_comment: ServerRelativeUrl witryn wyłączonych"
+  ],
+
+  "ExcludedLists": [
+    "_comment: GUID lub tytuł list wyłączonych z item-level scan"
+  ],
+
+  "SystemListTitles": [
+    "appdata",
+    "appfiles",
+    "Relationships List",
+    "Reusable Content",
+    "Quick Deploy Items",
+    "Composed Looks",
+    "Master Page Gallery",
+    "Theme Gallery",
+    "Solution Gallery",
+    "Web Template Extensions",
+    "Maintenance Log Library",
+    "Converted Forms",
+    "Form Templates",
+    "List Template Gallery",
+    "User Information List",
+    "Web Part Gallery"
+  ],
+
+  "_comment_SystemListBaseTemplateIds": "ID szablonów list traktowanych jako systemowe. NIE DODAWAJ: 100 (Generic List), 101 (Document Library), 102 (Survey), 103 (Links), 104 (Announcements), 105 (Contacts), 106 (Calendar), 107 (Tasks), 108 (Discussion Board), 109 (Picture Library), 115 (XML Form Library)",
+  "SystemListBaseTemplateIds": [
+    110, 111, 112, 113, 114, 116, 117, 118, 119,
+    300, 301, 302, 303,
+    400, 401, 402,
+    450, 451, 452, 453, 460, 465, 470, 480, 481, 499,
+    500, 501, 502, 503, 504, 850, 851, 852, 898, 899,
+    1000, 1100, 1221, 1222, 1250, 1260, 1302, 10000
+  ],
+
+  "ExcludedFromRemediation": {
+    "_comment": "Obiekty, których uprawnień NIE WOLNO modyfikować przez interfejs remediacji",
+    "WebApplicationUrls": [],
+    "SiteCollectionUrls": [],
+    "WebUrls": [],
+    "ListIds": [],
+    "Reason": "Obiekty systemowe chronione przed przypadkową modyfikacją"
+  }
+}

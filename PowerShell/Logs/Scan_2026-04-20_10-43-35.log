@@ -1,0 +1,57 @@
+﻿================================================================================
+SharePoint Permission Analyzer - Log skanowania
+Data:    2026-04-20 10:43:35
+Serwer:  MOSSWFESE
+Uzytkownik: TEST\lab.m.radziszewski
+================================================================================
+[2026-04-20 10:43:35.833] [Info] ============================================================
+[2026-04-20 10:43:35.848] [Info] SharePoint Permission Analyzer v1.0 - Sesja: 233AC2E6
+[2026-04-20 10:43:35.848] [Info] Poczatek skanowania: 2026-04-20 10:43:35
+[2026-04-20 10:43:35.896] [Info] Konfiguracja: E:\AdminData\Analizator uprawnień\Analizator uprawnień\PowerShell\Config\ScanConfig.json
+[2026-04-20 10:43:35.911] [Info] ============================================================
+[2026-04-20 10:43:35.927] [Info] Weryfikacja uprawnien Farm Admin: OK
+[2026-04-20 10:43:36.021] [Info] Farma: SharePoint_Config, Build: 16.0.19127.20338
+[2026-04-20 10:43:36.021] [Info] Znaleziono 3 Web Application(s)
+[2026-04-20 10:43:36.069] [Info]   WebApp[1] 'SharePoint - osobiste.test.pl' Url='https://osobiste.test.pl/' Type='SPWebApplication'
+[2026-04-20 10:43:36.085] [Info] [1/3] Przetwarzam WebApp: https://osobiste.test.pl
+[2026-04-20 10:43:36.101] [Info] Skanowanie Web Application: https://osobiste.test.pl
+[2026-04-20 10:43:36.211] [Info] Skanowanie Site Collections w https://osobiste.test.pl (SC: 4)
+[2026-04-20 10:43:36.322] [Info]  Skanowanie Site Collection: https://osobiste.test.pl
+[2026-04-20 10:43:36.385] [Info]   Skanowanie Web: https://osobiste.test.pl
+[2026-04-20 10:43:36.795] [Info]  Skanowanie Site Collection: https://osobiste.test.pl/personal/lab_m_radziszewski
+[2026-04-20 10:43:36.826] [Info]   Skanowanie Web: https://osobiste.test.pl/personal/lab_m_radziszewski
+[2026-04-20 10:43:37.190] [Info]  Skanowanie Site Collection: https://osobiste.test.pl/personal/sp_search
+[2026-04-20 10:43:37.237] [Error] Blad skanowania SC https://osobiste.test.pl/personal/sp_search: The following exception occurred while trying to enumerate the collection: "Access is denied. (Exception from HRESULT: 0x80070005 (E_ACCESSDENIED))".
+[2026-04-20 10:43:37.300] [Info]  Skanowanie Site Collection: https://sitemaster-fd6313d0-aba0-4722-a4a4-d4f8afafe96c
+[2026-04-20 10:43:37.379] [Error] Blad skanowania SC https://sitemaster-fd6313d0-aba0-4722-a4a4-d4f8afafe96c: The following exception occurred while trying to enumerate the collection: "Access is denied. (Exception from HRESULT: 0x80070005 (E_ACCESSDENIED))".
+[2026-04-20 10:43:37.457] [Info]   WebApp[2] 'SharePoint - portalse.test.pl' Url='https://portalse.test.pl/' Type='SPWebApplication'
+[2026-04-20 10:43:37.457] [Info] [2/3] Przetwarzam WebApp: https://portalse.test.pl
+[2026-04-20 10:43:37.471] [Info] Skanowanie Web Application: https://portalse.test.pl
+[2026-04-20 10:43:37.474] [Info] Skanowanie Site Collections w https://portalse.test.pl (SC: 1)
+[2026-04-20 10:43:37.533] [Info]  Skanowanie Site Collection: https://portalse.test.pl
+[2026-04-20 10:43:37.584] [Info]   Skanowanie Web: https://portalse.test.pl
+[2026-04-20 10:43:39.066] [Info]   WebApp[3] 'SharePoint - site.test.pl' Url='http://site.test.pl/' Type='SPWebApplication'
+[2026-04-20 10:43:39.082] [Info] [3/3] Przetwarzam WebApp: http://site.test.pl
+[2026-04-20 10:43:39.096] [Info] Skanowanie Web Application: http://site.test.pl
+[2026-04-20 10:43:39.160] [Info] Skanowanie Site Collections w http://site.test.pl (SC: 1)
+[2026-04-20 10:43:39.239] [Info]  Skanowanie Site Collection: http://site.test.pl
+[2026-04-20 10:43:39.318] [Info]   Skanowanie Web: http://site.test.pl
+[2026-04-20 10:43:39.665] [Info]   Skanowanie Web: http://site.test.pl/subsite
+[2026-04-20 10:43:40.154] [Info]   Skanowanie Web: http://site.test.pl/subsite/subsite1
+[2026-04-20 10:43:40.281] [Info]   Skanowanie Web: http://site.test.pl/subsite/subsite2
+[2026-04-20 10:43:40.392] [Info] Laczna liczba obiektow: 109
+[2026-04-20 10:43:40.392] [Info] Statystyki: WebApps=3, SC=6, Webs=7, Lists=30, Items=63
+[2026-04-20 10:43:40.424] [Info] Skanowanie zakonczone. Czas: 00:00:04. Obiektow: 109. Przypizan: 97
+[2026-04-20 10:43:40.486] [Info] Eksport JSON: E:\AdminData\Analizator uprawnień\Analizator uprawnień\PowerShell\Output\PermissionReport_2026-04-20_10-43-35.json
+[2026-04-20 10:43:40.565] [Info] Eksport CSV: E:\AdminData\Analizator uprawnień\Analizator uprawnień\PowerShell\Output\PermissionReport_2026-04-20_10-43-35.csv
+[2026-04-20 10:43:40.847] [Info] Wersjonowanie: +0 / -0 / ~0
+[2026-04-20 10:43:40.909] [Info] Generowanie raportu HTML...
+[2026-04-20 10:43:40.909] [Info]   Szablon: E:\AdminData\Analizator uprawnień\Analizator uprawnień\Report
+[2026-04-20 10:43:40.924] [Info]   Wyjscie: E:\AdminData\Analizator uprawnień\Analizator uprawnień\PowerShell\Output\Report
+[2026-04-20 10:43:40.971] [Info] Generowanie data.js...
+[2026-04-20 10:43:41.019] [Info] data.js wygenerowany: E:\AdminData\Analizator uprawnień\Analizator uprawnień\PowerShell\Output\Report\data.js (161 KB)
+[2026-04-20 10:43:41.127] [Info] Raport HTML wygenerowany: E:\AdminData\Analizator uprawnień\Analizator uprawnień\PowerShell\Output\Report
+[2026-04-20 10:43:41.143] [Info] Raport HTML: E:\AdminData\Analizator uprawnień\Analizator uprawnień\PowerShell\Output\Report\index.html
+[2026-04-20 10:43:41.362] [Info] Rozpoczecie publikacji raportu HTML do SharePoint: https://portalse.test.pl/RaportySP
+[2026-04-20 10:43:45.759] [Info] Raport opublikowany w SharePoint: https://portalse.test.pl/RaportySP/Report/index.html
+[2026-04-20 10:43:45.775] [Info] Sesja 233AC2E6 zakonczona. Bledy: 2
